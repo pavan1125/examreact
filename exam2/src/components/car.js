@@ -1,9 +1,9 @@
 import React from "react";
 
-const Car = ({ carNumber, time, isOccupied, index,onClick }) => {
+const Car = (props) => {
   const handleClick = () => {
-    if (!isOccupied) {
-      onClick();
+    if (!props.isOccupied) {
+      props.onClick();
     }
   };
 
@@ -12,16 +12,12 @@ const Car = ({ carNumber, time, isOccupied, index,onClick }) => {
       onClick={handleClick}
       style={{
         
-        backgroundColor: isOccupied ? "green" : "white",
-        border: "1px solid black",
-        display: "flex",
-        color:"gray",
-        justifyContent: "center",
-        alignItems: "center",
-        cursor: isOccupied ? "default" : "pointer"
+        backgroundColor: props.isOccupied ? "" : "white",
+        
+        cursor: props.isOccupied ? "default" : "pointer"
       }}
     >
-      {isOccupied ? `${carNumber} - ${time}` :""}
+      {props.isOccupied ? props.carNumber:null}
     </div>
   );
 };
