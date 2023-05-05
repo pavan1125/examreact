@@ -11,9 +11,11 @@ function CarApp() {
     const time = prompt("Enter time (24 hours clock):");
 
     const newCars = [...cars];
-    newCars[index] =`${carNumber},${time}`;
+    newCars[index] ={
+          carNumber:carNumber,
+          time:time
+    };
     setCars(newCars);
-
     setTotalAllocated(totalAllocated + 1);
     setEmptySeats(emptySeats - 1);
   };
@@ -50,15 +52,15 @@ function CarApp() {
           {Array(4).fill(null).map((row, i) => (
             <tr key={i}>
               {Array(5).fill(null).map((col, j) => {
-                const index = i * 5 + j;
+                const index = i * 5+j;
                 const car = cars[index];
                 return (
                   <td
                     key={j}
                     onClick={() => car ? handleCarDeparture(index) : handleCarArrival(index)}
-                    style={{ backgroundColor: car ? "green" : "white" }}
+                    style={{ backgroundColor: car ? "" : "white" }}
                   >
-                    {car ? <Car carNumber={car.carNumber} time={car.time}/> :""}
+                    {car ? <Car carNumber={cars[index].carNumber} time={cars[index].time}/> :index+1}
                   </td>
                 );
               })}
