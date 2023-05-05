@@ -1,58 +1,17 @@
-import React,{useState,useEffect} from "react"
-import axios from "axios";
+import React from "react"
+
+import Home from "./components/Home"
+import {BrowserRouter,Routes,Route} from "react-router-dom"
+import Questions from "./components/Questions";
 function App() {
-   const [questions,setQuestions]=useState([])
-
-   const [answers,setAnswers]=useState({
-         "1":"",
-         "2":"",
-         "3":"",
-         "4":""
-   })
-   console.log(answers)
-
-   useEffect(()=>{
-      axios.get("questions.json")
-      .then(res=>setQuestions(res.data))
-   },[])
-
-    console.log(questions)
-
-  const ChangeHandler=(e)=>{
-     setAnswers((prev)=>{
-        return{
-          ...prev,
-          [e.target.name]:e.target.value
-        }
-     })
-  }
   return (
-    <div className="App">
-      <ol>
-
-       {
-        questions.map((ques)=>{
-          return(
-              <ul key={ques.QuestionID}>
-                  {ques.Description}
-                  {ques.Options.map((option,index)=>{
-                    let ind=index
-                     return(
-                      <li key={option}>
-                        <label>
-                        <input type="radio" name={ques.QuestionID} value={answers} onChange={ChangeHandler}/>
-                          {option}
-                        </label>
-                      </li>
-                     )
-                  })}
-              </ul>
-               
-          )
-        })
-       }
-      </ol>
-    </div>
+   <BrowserRouter>
+   <Routes>
+    <Route path="/" element={<Home/>}>
+      <Route path="questions" element={<Questions/>}/>
+    </Route>
+   </Routes>
+   </BrowserRouter>
   );
 }
 
